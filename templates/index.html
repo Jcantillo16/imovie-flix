@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>iMovie-flix</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.common.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.common.min.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.es6.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.es6.min.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js.map"></script>
 
     <style type="text/css">
 
@@ -131,58 +146,91 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="contenedor">
-            <div class="logotipo">
-                <a href="index.html">iMovie-flix</a>
-            </div>
-            <nav>
-                <a href="index.html">Inicio</a>
-                <a href={% url 'movies' %} class="activo">Peliculas</a>
-            </nav>
+<header>
+    <div class="contenedor">
+        <div class="logotipo">
+            <a href="index.html">iMovie-flix</a>
         </div>
-    </header>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href={% url 'movies' %} class="activo">Peliculas</a>
+        </nav>
+    </div>
+</header>
 
-    <section class="pelicula-principal">
-        <div class="contenedor contenedor-pelicula">
+<section class="pelicula-principal">
+    <div class="contenedor contenedor-pelicula">
 
 
-            <h1 class="titulo">Kubo Movie</h1>
-            <img src="https://i.imgur.com/sfNIF5d.png">
+        <h1 class="titulo">Kubo Movie</h1>
+        <img src="https://i.imgur.com/sfNIF5d.png">
 
-            <p class="descripcion"> Test Backend Kubo SAS</p>
-            <div class="botones">
-                <button class="boton"><i class="fas fa-play"></i>Reproducir</button>
-                <button class="boton"><i class="fas fa-info-circle"></i>Más información</button>
-            </div>
+        <p class="descripcion"> Test Backend Kubo SAS</p>
+        <div class="botones">
+            <button class="boton"><i class="fas fa-play"></i>Reproducir</button>
+            <button class="boton"><i class="fas fa-info-circle"></i>Más información</button>
         </div>
-    </section>
+    </div>
+</section>
+<div class="container">
+    <div class="form">
+        <h1>Registro De Usuario</h1>
+        <form action="{% url 'register' %}" method="post">
 
-{##mostrar las peliculas creadas en la base de datos#}
-    <section class="peliculas">
-        <div class="contenedor">
-            <h2 class="titulo">Peliculas</h2>
-            <div class="contenedor">
-                {% for movie in movies %}
-                    <div class="pelicula">
-                        <img src="{{ movie.img }}" alt="">
-                        <div class="pelicula-info">
-                            <h3>{{ movie.name }}</h3>
-                            <span class="anio">{{ movie.year }}</span>
-                            <p>{{ movie.description }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-
-
-
-
-
-
-
-
-
-
-
+            <label for="name">Nombre de usuario</label>
+            <input type="text" name="name" id="name" required>
+            <br>
+            <br>
+            <label for="email">Correo electronico</label>
+            <input type="email" name="email" id="email" required>
+            <br>
+            <br>
+            <label for='phone'>Telefono</label>
+            <input type='text' name='phone' id='phone' required>
+            <br>
+            <br>
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" id="password" required>
+            <br>
+            <br>
+            <button type="submit">Registrar</button>
+            {% csrf_token %}
+            <br>
+            <br>
+            <a href="login.html" method="post">Iniciar Sesion</a>
+        </form>
+        <script>
+            $(document).ready(function () {
+                var form = $('form');
+                form.submit(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: form.attr('action'),
+                        method: form.attr('method'),
+                        data: form.serialize(),
+                        success: function (data) {
+                            swal({
+                                title: 'Registro Exitoso',
+                                text: 'Bienvenido a Driver-Reserve',
+                                type: 'success',
+                                confirmButtonText: 'Aceptar'
+                            }).then(function () {
+                                window.location.href = "{% url 'login' %}";
+                            });
+                        },
+                        error: function (data) {
+                            swal({
+                                title: 'Error',
+                                text: 'El usuario ya existe',
+                                type: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
+</div>
 </body>
 </html>
