@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iMovie-flix</title>
+
+    <style type="text/css">
+
+        :root {
+            --rojo: #E50914;
+            --fondo: #141414;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--fondo);
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .contenedor {
+            width: 90%;
+            margin: auto;
+        }
+
+        header {
+            padding: 30px 0;
+        }
+
+        header .contenedor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logotipo {
+            font-family: 'Bebas Neue', cursive;
+            font-weight: normal;
+            color: var(--rojo);
+            font-size: 40px;
+        }
+
+        header nav a {
+            color: #AAA;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        header nav a:hover,
+        header nav a.activo {
+            color: #FFF;
+        }
+
+        /* ---- ----- ----- Pelicula Principal ----- ----- ----- */
+        .pelicula-principal {
+            font-size: 16px;
+            min-height: 40.62em;
+            color: #fff;
+            background: linear-gradient(rgba(0, 0, 0, .50) 0%, rgba(0, 0, 0, .50) 100%), url(../img/backdrop.jpg);
+            background-position: center center;
+            background-size: cover;
+            margin-bottom: 3.12em;
+            display: flex;
+            align-items: end;
+        }
+
+        .pelicula-principal .contenedor {
+            margin: 0 auto;
+            margin-bottom: 6.25em;
+        }
+
+        .pelicula-principal .titulo {
+            font-weight: 600;
+            font-size: 3.12em;
+            margin-bottom: 0.4em;
+        }
+
+        .pelicula-principal .descripcion {
+            font-weight: normal;
+            font-size: 1em;
+            line-height: 1.75em;
+            max-width: 50%;
+            margin-bottom: 1.25em;
+        }
+
+        .pelicula-principal .boton {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 0.31em;
+            padding: 0.93em 1.87em;
+            color: #fff;
+            margin-right: 1.25em;
+            cursor: pointer;
+            transition: .3s ease all;
+            font-size: 1.12em;
+        }
+
+        .pelicula-principal .boton:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .pelicula-principal .boton i {
+            margin-right: 1.25em;
+        }
+
+        /* ---- ----- ----- Media Queries ----- ----- ----- */
+        @media screen and (max-width: 800px) {
+            header .logotipo {
+                margin-bottom: 10px;
+                font-size: 30px;
+            }
+
+            header .contenedor {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .pelicula-principal {
+                font-size: 14px;
+            }
+
+            .pelicula-principal .descripcion {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="contenedor">
+            <div class="logotipo">
+                <a href="index.html">iMovie-flix</a>
+            </div>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href={% url 'movies' %} class="activo">Peliculas</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="pelicula-principal">
+        <div class="contenedor contenedor-pelicula">
+
+
+            <h1 class="titulo">Kubo Movie</h1>
+            <img src="https://i.imgur.com/sfNIF5d.png">
+
+            <p class="descripcion"> Test Backend Kubo SAS</p>
+            <div class="botones">
+                <button class="boton"><i class="fas fa-play"></i>Reproducir</button>
+                <button class="boton"><i class="fas fa-info-circle"></i>Más información</button>
+            </div>
+        </div>
+    </section>
+
+{##mostrar las peliculas creadas en la base de datos#}
+    <section class="peliculas">
+        <div class="contenedor">
+            <h2 class="titulo">Peliculas</h2>
+            <div class="contenedor">
+                {% for movie in movies %}
+                    <div class="pelicula">
+                        <img src="{{ movie.img }}" alt="">
+                        <div class="pelicula-info">
+                            <h3>{{ movie.name }}</h3>
+                            <span class="anio">{{ movie.year }}</span>
+                            <p>{{ movie.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
