@@ -7,12 +7,10 @@ django: 4.1.3
 # Setup
 1. Create a virtual environment
 2. Install requirements.txt
-3. Run migrations
-4. Create a superuser
-5. Run the server
-6. Create a new user
-7. Login
-8. Create a new movie
+3. load the categories from seeds/load_categories.py
+4. run the migrations
+5. run the server
+6. create a superuser
 
 
 # Create a virtual environment
